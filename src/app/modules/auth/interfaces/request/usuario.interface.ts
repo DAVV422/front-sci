@@ -1,8 +1,12 @@
 export interface UsuarioRequest {
-  id: string;
-  nombre: string;
-  apellido: string;
-  email: string;
-  password: string;
-  role: string;
+  id: number,
+  name: string,
+  birthdate: string,
+  grade: string,
+  cellphone: string,
+  email: string,
+  role: string
+  lastName: string,
+  password: string,
 }
+

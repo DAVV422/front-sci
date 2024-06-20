@@ -60,7 +60,7 @@ export class AuthService {
 
   register(usuario: UsuarioRequest):  Observable<Login> {
     const { id, ...rest } = usuario;
-    this.http.post<Usuario>(`${this.baseUrl}/register`, rest).pipe(
+    this.http.post<Usuario>(`${this.baseUrl}/register`, { rest }).pipe(
       catchError(err => of(undefined))
     );
     const { email, password } = rest;

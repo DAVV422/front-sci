@@ -15,5 +15,5 @@ import { EmergenciesHeaderComponent } from '../../components/emergencies-header/
   styleUrl: './list-emergencies.component.scss'
 })
 export class ListEmergenciesComponent {
-
+  
 }

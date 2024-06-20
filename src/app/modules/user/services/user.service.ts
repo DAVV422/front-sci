@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
-import { Usuario } from '../../auth/interfaces/response/login.interface';
 import { UsuarioRequest } from '../../auth/interfaces/request/usuario.interface';
 import { AuthService } from '../../auth/services/auth.service';
+import { User } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,26 +19,26 @@ export class UserService {
     private authService: AuthService
   ) { }
 
-  getAll(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.baseUrl}`, this.authService.headers());
+  getAll(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}`, this.authService.headers());
   }
 
-  getById(id: string): Observable<Usuario | undefined> {
-    return this.http.get<Usuario>(`${this.baseUrl}/${id}`, this.authService.headers())
+  getById(id: string): Observable<User | undefined> {
+    return this.http.get<User>(`${this.baseUrl}/${id}`, this.authService.headers())
       .pipe(
         catchError(err => of(undefined))
       );
   }
 
-  update(usuario: UsuarioRequest): Observable<Usuario | undefined> {
+  update(usuario: UsuarioRequest): Observable<User | undefined> {
     if (!usuario.id) throw new Error('No se ha encontrado el id del usuario');
     if (usuario.password === '') {
       const { password, ...rest } = usuario;
-      return this.http.patch<Usuario>(`${this.baseUrl}/${usuario.id}`, rest, this.authService.headers()).pipe(
+      return this.http.patch<User>(`${this.baseUrl}/${usuario.id}`, rest, this.authService.headers()).pipe(
         catchError(err => of(undefined))
       );
     }
-    return this.http.patch<Usuario>(`${this.baseUrl}/${usuario.id}`, usuario, this.authService.headers()).pipe(
+    return this.http.patch<User>(`${this.baseUrl}/${usuario.id}`, usuario, this.authService.headers()).pipe(
       catchError(err => of(undefined))
     );
   }

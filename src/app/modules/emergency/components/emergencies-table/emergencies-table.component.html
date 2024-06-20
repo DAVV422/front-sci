@@ -15,20 +15,19 @@
       <!--Table head-->
       <thead class="text-xs uppercase text-muted-foreground">
         <tr>
-          <th class="py-3 text-left">Nombre de la emergencia</th>
-          <th class="py-3 text-left">Ubicación de la emergencia</th>
+          <th class="py-3 text-left">Nombre de la emergencia</th>          
           <th class="py-3 text-left">Fecha</th>
           <th class="py-3 text-left">Hora</th>
           <th class="py-3 text-left">Tipo</th>
-          <th class="py-3 text-left">Duración</th>
+          <th class="py-3 text-left">Acción</th>
         </tr>
       </thead>
       <!--end Table head-->
       <!--Table body-->
       <tbody>
         <tr
-          *ngFor="let auction of activeAuction"
-          [auction]="auction"
+          *ngFor="let emergency of emergencies"
+          [auction]="emergency"
           emergency-table-item
           class="border-b border-dashed border-border hover:bg-card"></tr>
       </tbody>

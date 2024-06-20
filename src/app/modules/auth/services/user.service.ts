@@ -34,8 +34,8 @@ export class UserService {
   create(usuario: User_Created): Observable<Usuario | undefined> {
     const { ...rest } = usuario;
     console.log(rest);
-    return this.http.post<Usuario>(`${this.baseUrlUserNew}`, rest
-    //  this.authService.headers()
+    return this.http.post<Usuario>(`${this.baseUrlUserNew}`, rest,
+    this.authService.headers()
       ).pipe(
       catchError(err => of(undefined))
     );

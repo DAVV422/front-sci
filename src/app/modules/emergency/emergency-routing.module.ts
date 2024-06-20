@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CreateEmergencyComponent } from './pages/create-emergency/create-user.component';
+import { CreateEmergencyComponent } from './pages/create-emergency/create-emergency.component';
 import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { ListEmergenciesComponent } from './pages/list-emergencies/list-emergencies.component';
