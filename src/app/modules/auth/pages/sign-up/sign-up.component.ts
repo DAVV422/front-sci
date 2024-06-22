@@ -99,6 +99,10 @@ export class SignUpComponent implements OnInit {
   }
 
   updateImage(id: string, url_image: string){
-    // this.userService.update({ id, url_image })
+    this.userService.update({ id, url_image }).subscribe(
+      (resp) => {
+        console.log(resp)
+      }
+    );
   }
 }
