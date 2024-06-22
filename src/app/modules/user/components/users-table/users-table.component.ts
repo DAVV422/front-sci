@@ -16,10 +16,11 @@ export class UserTableComponent implements OnInit {
   public users: User[] = [];
 
   constructor(private router: Router, private userService: UserService) {    
+    this.getUsers();
   }
 
   ngOnInit(): void {
-    this.getUsers();
+    
   }
 
   newUser(): void {

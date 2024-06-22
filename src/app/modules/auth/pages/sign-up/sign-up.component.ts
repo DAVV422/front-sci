@@ -6,6 +6,7 @@ import { ButtonComponent } from 'src/app/shared/components/button/button.compone
 import { UserService } from '../../services/user.service';
 import { NgClass, NgIf } from '@angular/common';
 import { catchError, of, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,11 +20,14 @@ export class SignUpComponent implements OnInit {
   submitted = false;
   passwordTextType!: boolean;
   disabled: boolean = false;
+  selectedFile: File | null = null;
+  url_image: string = "";
 
   constructor(
     private readonly _formBuilder: FormBuilder, 
     private readonly router: Router,    
     private userService: UserService,
+    private http: HttpClient
   ) {}
 
   onClick() {
@@ -42,6 +46,18 @@ export class SignUpComponent implements OnInit {
     });
   }
 
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      const renamedFile = new File([file], 'perfil' + file.name.substring(file.name.lastIndexOf('.')), { type: file.type });
+      this.selectedFile = renamedFile;
+      this.form.patchValue({
+        profileImage: renamedFile
+      });
+      console.log(renamedFile);
+    }
+  }
+
   get f() {
     return this.form.controls;
   }
@@ -50,28 +66,39 @@ export class SignUpComponent implements OnInit {
     this.passwordTextType = !this.passwordTextType;
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
     this.disabled = true;
-    const { email, password, name, lastName, cellphone, birthdate, grade } = this.form.value;
+    const { email, password, name, lastName, cellphone, birthdate, grade } = this.form.value;        
     
-    this.userService.create({ email, last_name:lastName, name, birthdate, grade, cellphone, password, role: 'basic' })
+    this.userService.create({ email, last_name:lastName, name, birthdate ,grade, cellphone, password, role: 'basic', url_image: this.url_image })
       .pipe(
         tap(resp => console.log(resp)),
-        // tap(resp => localStorage.setItem('token', resp.data.accessToken)),
-        // tap(resp => localStorage.setItem('user', JSON.stringify(resp.data.User))),
         catchError(err => of(
-          // this.showSnackbar('Usuario o Contraseña Incorrecta', 'Cerrar')
+          console.log(err)
         )),
         tap(() => this.disabled = false),
       ).subscribe( (resp:any) => {
         if (resp) {
-          this.router.navigate(['/sci/users']);
-          // this.showSnackbar('Sesión iniciada correctamente', 'Cerrar');
+          this.saveImage(resp.data.id);          
         }
       });
+  }
+
+  saveImage(id: string){
+    const formData = new FormData();
+    formData.append('image', this.selectedFile!);
+    this.http.post('https://emergy-ws-production.up.railway.app/image/upload', formData).subscribe((response: any) => {
+      console.log('Respuesta del servidor', response);
+      this.updateImage(id, response.url);
+      this.router.navigate(['/sci/users']);
+    });
+  }
+
+  updateImage(id: string, url_image: string){
+    // this.userService.update({ id, url_image })
   }
 }

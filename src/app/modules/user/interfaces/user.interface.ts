@@ -6,5 +6,6 @@ export interface User {
     grade: string,
     cellphone: string,
     email: string,
-    role: string
+    role: string,
+    url_image?: string;
   }

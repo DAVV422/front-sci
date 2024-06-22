@@ -1,4 +1,4 @@
-import { Usuario } from "src/app/administrativo/interfaces/response/usuario.interface";
+import { Usuario } from "../interfaces/response/usuario.interface";
 
 export interface Login {
   accessToken: string;

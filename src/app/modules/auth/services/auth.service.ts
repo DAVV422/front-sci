@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Observable, catchError, map, of } from 'rxjs';
-import { Login, Usuario } from '../interfaces/response/login.interface';
+import { Login, User_Created, Usuario } from '../interfaces/response/login.interface';
 import { Router } from '@angular/router';
 import { UsuarioRequest } from '../interfaces/request/usuario.interface';
+import { User } from '../../user/interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -58,9 +59,9 @@ export class AuthService {
     return of(true);
   }
 
-  register(usuario: UsuarioRequest):  Observable<Login> {
-    const { id, ...rest } = usuario;
-    this.http.post<Usuario>(`${this.baseUrl}/register`, { rest }).pipe(
+  register(usuario: User_Created):  Observable<Login> {
+    const { ...rest } = usuario;
+    this.http.post<User>(`${this.baseUrl}/register`, { rest }).pipe(
       catchError(err => of(undefined))
     );
     const { email, password } = rest;

@@ -12,6 +12,7 @@ export interface Usuario{
   name: string;
   last_name: string;
   birthdate: Date;
+  url_image: string;
   cellphone: string;
   grade: string;
   email: string;
@@ -27,6 +28,7 @@ export interface User_Created{
   email: string;
   password: string;  
   role: string;
+  url_image?: string;
 }
 
 export interface DataLogin{
