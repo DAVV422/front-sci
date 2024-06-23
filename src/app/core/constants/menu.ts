@@ -71,6 +71,17 @@ export class Menu {
       ],
     },
     {
+      group: 'Equipamiento',
+      separator: true,
+      items: [
+        {
+          icon: 'assets/icons/heroicons/outline/archive.svg',
+          label: 'Equipamiento',
+          route: '/sci/equipments',
+        }
+      ],
+    },
+    {
       group: 'Config',
       separator: false,
       items: [

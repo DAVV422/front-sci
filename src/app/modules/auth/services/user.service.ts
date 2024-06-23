@@ -13,6 +13,7 @@ import { AuthService } from './auth.service';
 export class UserService {
 
   private baseUrl: string = environment.baseUrl + '/user';
+  private baseUrlImage: string = environment.baseUrlImages;
   private baseUrlUserNew: string = environment.baseUrl + '/register';
 
   constructor(
@@ -41,7 +42,8 @@ export class UserService {
   }
 
   saveImage(formData: FormData): Observable<any> {
-    return this.http.post('https://emergy-ws-production.up.railway.app/image/upload', formData);
+    // return this.http.post('https://emergy-ws-production.up.railway.app/image/upload', formData);
+    return this.http.post(`${this.baseUrlImage}`, formData);
   }
 
   update(usuario: UsuarioRequest): Observable<Usuario | undefined> {

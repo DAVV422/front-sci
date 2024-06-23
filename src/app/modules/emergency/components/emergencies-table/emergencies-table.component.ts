@@ -15,12 +15,14 @@ import { EmergencyService } from '../../services/emergency.service';
 export class EmergenciesTableComponent implements OnInit {
   public emergencies: Emergency[] = [];
 
-  constructor(private router: Router, 
+  constructor(
+    private router: Router, 
     private emergencyService: EmergencyService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.getEmergencies();
+  }
+
+  ngOnInit(): void {    
   }
 
   newUser(): void {

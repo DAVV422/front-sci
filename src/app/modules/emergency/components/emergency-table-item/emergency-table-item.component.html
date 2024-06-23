@@ -1,20 +1,10 @@
 <td class="pr-2 py-2 text-left">
   <span class="text-sm font-semibold text-foreground"> {{auction.name}}</span>
-  <!-- <div class="flex items-center"> -->
-    <!-- <img [src]="" class="mr-2 h-10 w-10 flex-none rounded-sm" alt="" /> -->
-    <!-- <div class="flex flex-col justify-items-start"> -->
-      <!-- <a href="#" class="mb-1 text-sm font-semibold text-foreground pr-4">{{auction.name}}</a> -->
-      <!-- <span class="text-xs font-semibold text-muted-foreground/50">creator</span> -->
-    <!-- </div> -->
-  <!-- </div> -->
 </td>
 <td class="pl-2 py-2 text-left">
   <span class="text-sm font-semibold text-muted-foreground">{{auction.date}}</span>
 </td>
 <td class="pl-2 py-2 text-left">
-  <!-- <div class="ml-4 flex items-center justify-start">
-		<img [src]="auction.avatar" class="mr-3 h-8 w-8 rounded-b-md" alt="" />
-	</div> -->
   <span class="text-sm font-semibold text-muted-foreground">{{auction.hour}}</span>
 </td>
 <td class="pl-2 py-2 text-left">
@@ -23,7 +13,7 @@
 <td class="pl-2 py-2 text-center">  
   <div class="flex justify-center">
     <button
-      href="#"
+      href="#" (click)="show(auction.id!)"
       class="flex h-7 w-7 items-center justify-center rounded-md bg-card text-muted-foreground hover:bg-muted hover:text-foreground">
       <svg-icon src="assets/icons/heroicons/outline/arrow-sm-right.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
     </button>

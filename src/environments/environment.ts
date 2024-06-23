@@ -4,6 +4,7 @@
 
 export const environment = {
   baseUrl: 'http://localhost:3000/api',
+  baseUrlImages: 'https://emergy-ws-production.up.railway.app/image/upload',
   production: false,
 };
 

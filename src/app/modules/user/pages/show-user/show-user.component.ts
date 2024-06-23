@@ -16,10 +16,10 @@ import { User } from '../../interfaces/user.interface';
   })
   export class ShowUserComponent implements OnInit {
     form!: FormGroup;
-    submitted = false;    
+    submitted = false;
     public disabled: boolean = true;
     user_id: string = "";
-    public user: User = <User>{};    
+    public user: User = <User>{};
 
     constructor(
         private readonly _formBuilder: FormBuilder, 

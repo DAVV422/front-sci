@@ -1,0 +1,38 @@
+<td class="py-2 pr-2">
+  <div class="flex items-center">
+    <img [src]="equipment.urlPhoto" class="mr-2 h-10 w-10 flex-none rounded-sm" alt="" />
+  </div>
+</td>
+<td class="py-2 pr-2">
+  <div class="flex items-center">
+    <div class="flex flex-col justify-items-start">
+      <a href="#" class="mb-1 text-sm font-semibold text-foreground">{{equipment.name}}</a>
+    </div>
+  </div>
+</td>
+<td class="py-2 pl-2 text-left">
+  <span class="text-sm font-semibold text-muted-foreground"> {{equipment.utilization}}</span>
+</td>
+<td class="py-2 pl-2 text-left">
+  <span class="text-sm font-semibold text-muted-foreground">{{equipment.description}}</span>
+</td>
+<td class="py-2 pl-2 text-left">
+  <span class="text-sm font-semibold text-muted-foreground">{{equipment.stateAcquisition}}</span>
+  <span class="text-sm font-semibold text-muted-foreground">{{equipment.acquisitionDate}}</span>
+</td>
+<td class="py-2 pl-2 text-left">
+  <span class="text-sm font-semibold text-muted-foreground">{{equipment.stateActual}}</span>
+</td>
+<td class="pl-2 py-2 text-center">
+  <div class="flex justify-center">
+    <button [routerLink]="['../edit', equipment.id]"
+      class="flex h-7 w-7 items-center justify-center rounded-md bg-card text-muted-foreground hover:bg-muted hover:text-foreground">
+      <svg-icon src="assets/icons/heroicons/outline/pencil.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
+    </button>
+    <!--  -->
+    <button (click)="confirmDelete(equipment.id)"
+      class="flex ml-2 h-7 w-7 items-center justify-center rounded-md bg-card text-muted-foreground hover:bg-muted hover:text-foreground">
+      <svg-icon src="assets/icons/heroicons/outline/trash.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
+    </button>
+  </div>
+</td>

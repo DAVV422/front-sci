@@ -7,6 +7,7 @@ import { User } from 'src/app/modules/user/interfaces/user.interface';
 import { UserService } from 'src/app/modules/auth/services/user.service';
 import { NgClass, NgFor } from '@angular/common';
 import { EmergencyService } from '../../services/emergency.service';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-create-user',
@@ -15,9 +16,11 @@ import { EmergencyService } from '../../services/emergency.service';
   templateUrl: './create-emergency.component.html',
   styleUrl: './create-emergency.component.scss'
 })
-export class CreateEmergencyComponent implements OnInit{
+export class CreateEmergencyComponent implements OnInit {
   public users: User[] = [];
   form!: FormGroup;
+  public map!: L.Map;
+  public marker!: L.Marker;
 
   constructor(
     private readonly _formBuilder: FormBuilder,
@@ -25,18 +28,42 @@ export class CreateEmergencyComponent implements OnInit{
     private emergencyService: EmergencyService,
     private readonly router: Router
   ){
-    this.getUsers();
     this.form = this._formBuilder.group({
       name: ['', [Validators.required]],
       location: ['', [Validators.required]],
       type: ['', [Validators.required]],
       date: ['', [Validators.required]],
       hour: ['', [Validators.required]],
-      comandante: ['', [Validators.required]]
+      comandante: ['', [Validators.required]],
+      coordinates: [[], [Validators.required]]
     });
   }
   
-  ngOnInit(): void {    
+  ngOnInit(): void {
+    this.getUsers();
+    this.initMap();
+  }
+
+  private initMap(): void {
+    const boliviaCoords: L.LatLngExpression = [-16.2902, -63.5887];
+    this.map = L.map('map', {
+      center: boliviaCoords,
+      zoom: 6
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.map);
+
+    this.marker = L.marker(boliviaCoords).addTo(this.map);
+
+    this.map.on('click', (e: L.LeafletMouseEvent) => {
+      const { lat, lng } = e.latlng;
+      this.form.get('coordinates')?.setValue([lat, lng]);
+      console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+      this.marker.setLatLng(e.latlng);
+      console.log(this.form.value);
+    });
   }
 
   getUsers(){
@@ -46,9 +73,9 @@ export class CreateEmergencyComponent implements OnInit{
   }
 
   onSubmit(){
-    const {name, location, type, date, hour, comandante} = this.form.value;
+    const {name, location, type, date, hour, comandante, coordinates} = this.form.value;
     const emergency = this.emergencyService.create({ 
-      name, locationDescription: location, type, date, state: "En curso", hour, duration:""
+      name, location_description: location, type, date, state: "En curso", hour, duration:"", coordinates
     }).subscribe((resp: any) => {
       return resp.data;
     });
