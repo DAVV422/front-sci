@@ -37,6 +37,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class ProfileMenuComponent implements OnInit {
   public isOpen = false;
+  public user = JSON.parse(localStorage.getItem('user')!);
   public profileMenu = [
     {
       title: 'Your Profile',

@@ -40,6 +40,10 @@ export class UserService {
     );
   }
 
+  saveImage(formData: FormData): Observable<any> {
+    return this.http.post('https://emergy-ws-production.up.railway.app/image/upload', formData);
+  }
+
   update(usuario: UsuarioRequest): Observable<Usuario | undefined> {
     if (!usuario.id) throw new Error('No se ha encontrado el id del usuario');
     if (usuario.password === '') {

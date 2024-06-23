@@ -48,16 +48,16 @@ export class Menu {
           label: 'Information',
           route: '/sci/emergencies',
         },
-        {
-          icon: 'assets/icons/heroicons/outline/folder.svg',
-          label: 'Forms',
-          route: '/forms',
-          children: [
-            { label: 'Form 201', route: '/forms/201' },
-            { label: 'Form 207', route: '/forms/207' },
-            { label: 'Form 211', route: '/forms/211' },
-          ],
-        },
+        // {
+        //   icon: 'assets/icons/heroicons/outline/folder.svg',
+        //   label: 'Forms',
+        //   route: '/forms',
+        //   children: [
+        //     { label: 'Form 201', route: '/forms/201' },
+        //     { label: 'Form 207', route: '/forms/207' },
+        //     { label: 'Form 211', route: '/forms/211' },
+        //   ],
+        // },
         // {
         //   icon: 'assets/icons/heroicons/outline/gift.svg',
         //   label: 'Forms',

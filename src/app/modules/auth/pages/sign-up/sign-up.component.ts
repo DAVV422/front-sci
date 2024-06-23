@@ -66,7 +66,7 @@ export class SignUpComponent implements OnInit {
     this.passwordTextType = !this.passwordTextType;
   }
 
-  async onSubmit(): Promise<void> {
+  onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -91,7 +91,8 @@ export class SignUpComponent implements OnInit {
   saveImage(id: string){
     const formData = new FormData();
     formData.append('image', this.selectedFile!);
-    this.http.post('https://emergy-ws-production.up.railway.app/image/upload', formData).subscribe((response: any) => {
+    this.userService.saveImage(formData).subscribe( (response) => {
+    // this.http.post('https://emergy-ws-production.up.railway.app/image/upload', formData).subscribe((response: any) => {
       console.log('Respuesta del servidor', response);
       this.updateImage(id, response.url);
       this.router.navigate(['/sci/users']);
