@@ -22,7 +22,7 @@ export class EquipmentTableItemComponent implements OnInit {
   ngOnInit(): void { }
 
   confirmDelete(equipmentId: string): void {
-    const confirmed = confirm('Are you sure you want to delete this equipment?');
+    const confirmed = confirm('¿Está seguro que quiere eliminar este equipo?');
     if (confirmed) {
       this.delete(equipmentId);
     }

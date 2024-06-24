@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
-import { Emergency } from '../interfaces/emergency.interface';
+import { Action, Attend, Charge, Emergency } from '../interfaces/emergency.interface';
 import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable({
@@ -12,6 +12,9 @@ import { AuthService } from '../../auth/services/auth.service';
 export class EmergencyService {
 
   private baseUrl: string = environment.baseUrl + '/emergency';
+  private baseUrlAttend: string = environment.baseUrl + '/attend';
+  private baseUrlCharge: string = environment.baseUrl + '/charge';
+  private baseUrlAction: string = environment.baseUrl + '/action';
 
   constructor(
     private http: HttpClient,
@@ -50,6 +53,33 @@ export class EmergencyService {
         map(() => true),
         catchError(err => of(false)),
       );
+  }
+
+
+  getAttends(id:string): Observable<Attend[]>{
+    return this.http.get<Attend[]>(`${this.baseUrlAttend}/emergency/${id}`, this.authService.headers());
+  }
+
+  createAttend(charge: string, user: string, emergency: string, date: Date): Observable<Attend> {    
+    return this.http.post<Attend>(`${this.baseUrlAttend}`, { charge, date, user, emergency },
+    this.authService.headers());
+  }
+
+  deleteAttend(id: string): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.baseUrlAttend}/${id}`, this.authService.headers())
+      .pipe(
+        map(() => true),
+        catchError(err => of(false)),
+      );
+  }
+
+  getCharge(name:string): Observable<Charge> {
+    const charge = {name:name};
+    return this.http.post<Charge>(`${this.baseUrlCharge}/name`, charge, this.authService.headers());
+  }
+
+  getActions(id: string): Observable<Action>{
+    return this.http.get<Action>(`${this.baseUrlAction}/form201/${id}`, this.authService.headers());
   }
 
 }

@@ -49,3 +49,12 @@ export interface Attend {
   user: User,
   emergency: Emergency
 }
+
+export interface Action {
+  id?: string,
+  date: Date,
+  hour: string,
+  description: string,
+  form201: Form201
+
+}

@@ -77,9 +77,22 @@ export class CreateEmergencyComponent implements OnInit {
     const emergency = this.emergencyService.create({ 
       name, location_description: location, type, date, state: "En curso", hour, duration:"", coordinates
     }).subscribe((resp: any) => {
-      return resp.data;
+      this.createAttend(resp.data.id, comandante);
     });
-    console.log(emergency);
-    this.router.navigate(['/sci/emergencies']);
+  }
+
+  createAttend(emergency_id: string, user_id: string){
+    this.emergencyService.getCharge("comandante de incidente").subscribe(
+      (resp: any) => {
+        const date: Date = new Date(Date.now());
+        this.emergencyService.createAttend(resp.data.id, user_id, emergency_id, date).subscribe(
+          (resp) => {
+            if (resp){
+              this.router.navigate(['/sci/emergencies/show', emergency_id]);
+            }
+          }
+        );
+      }
+    );
   }
 }

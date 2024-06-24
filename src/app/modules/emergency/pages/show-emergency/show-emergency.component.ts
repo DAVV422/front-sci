@@ -4,14 +4,15 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
-import { Emergency, Form201 } from '../../interfaces/emergency.interface';
+import { Attend, Emergency, Form201 } from '../../interfaces/emergency.interface';
 import { tap } from 'rxjs';
 import { EmergencyService } from '../../services/emergency.service';
+import { AttendTableItemComponent } from '../../components/atten-table-item/attend-table-item.component';
 
 @Component({
     selector: 'app-show-emergency',
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, NgClass, NgIf, ButtonComponent, NgFor],
+    imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, NgClass, NgIf, ButtonComponent, NgFor, AttendTableItemComponent],
     templateUrl: 'show-emergency.component.html'
 })
 
@@ -21,7 +22,7 @@ export class ShowEmergencyComponent implements OnInit {
     public disabled: boolean = true;
     emergency_id: string = "";
     public emergency: Emergency = <Emergency>{};
-    public form201: Form201 = <Form201>{};
+    public attends: Attend[] = [];
     
     constructor(
         private readonly _formBuilder: FormBuilder,
@@ -46,6 +47,13 @@ export class ShowEmergencyComponent implements OnInit {
         this.emergencyService.getById(this.emergency_id).subscribe(
             (resp: any) => {
                 this.emergency = resp.data;
+            }
+        )
+
+        this.emergencyService.getAttends(this.emergency_id).subscribe(
+            (resp: any) => {
+                console.log(resp);
+                this.attends = resp.data;
             }
         )
     }
