@@ -4,7 +4,7 @@ import { Observable, catchError, map, of } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../auth/services/auth.service';
-import { Equipment } from '../interfaces/equipment.interface';
+import { Equipment, Resource } from '../interfaces/equipment.interface';
 import { EquipmentDto } from '../interfaces/equipmentDto.interface';
 
 @Injectable({
@@ -13,6 +13,7 @@ import { EquipmentDto } from '../interfaces/equipmentDto.interface';
 export class EquipmentService {
 
   private baseUrl: string = environment.baseUrl + '/equipment';
+  private baseUrlResource: string = environment.baseUrl + '/resource';
   private baseUrlImage: string = environment.baseUrlImages;
 
   constructor(
@@ -29,6 +30,10 @@ export class EquipmentService {
       .pipe(
         catchError(err => of(undefined))
       );
+  }
+
+  getResource(id: string): Observable<Resource[]> {
+    return this.http.get<Resource[]>(`${this.baseUrlResource}/by-emergency/${id}`, this.authService.headers());
   }
 
   saveImage(formData: FormData): Observable<any> {

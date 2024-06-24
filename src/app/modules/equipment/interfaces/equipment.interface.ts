@@ -1,3 +1,5 @@
+import { Emergency } from "../../emergency/interfaces/emergency.interface";
+
 export interface Equipment {
   id: string;
   name: string;
@@ -9,4 +11,14 @@ export interface Equipment {
   urlPhoto: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface Resource {
+  id: string;
+  state_initial: string;
+  state_end: string;
+  date: string;
+  hour: string;
+  emergency: Emergency;
+  equipment: Equipment;
 }

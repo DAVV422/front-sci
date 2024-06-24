@@ -8,12 +8,14 @@ import { ButtonComponent } from 'src/app/shared/components/button/button.compone
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { tap } from 'rxjs';
 import { Form201Service } from '../../services/form201.service';
+import { ActionTableComponent } from '../../components/action-table/action-table.component';
 
 @Component({
     selector: 'app-show-forms-emergency',
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, NgClass, NgIf, ButtonComponent, NgFor],
-    templateUrl: 'show-forms-emergency.component.html'
+    imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, NgClass,
+         NgIf, ButtonComponent, NgFor, ActionTableComponent],
+    templateUrl: './show-forms-emergency.component.html'
 })
 
 export class ShowFormsEmergencyComponent implements OnInit {
@@ -30,11 +32,11 @@ export class ShowFormsEmergencyComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private emergencyService: EmergencyService,
         private form201Service: Form201Service
-    ) { 
-        
+    ) {
+
     }
 
-    ngOnInit() { 
+    ngOnInit() {
         this.activatedRoute.params
         .pipe(tap(({ id }) => { this.emergency_id = id })).subscribe();
 

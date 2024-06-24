@@ -3,17 +3,22 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { Attend, Emergency, Form201 } from '../../interfaces/emergency.interface';
 import { tap } from 'rxjs';
 import { EmergencyService } from '../../services/emergency.service';
 import { AttendTableItemComponent } from '../../components/atten-table-item/attend-table-item.component';
+import { EquipmentTable2ItemComponent } from '../../components/equipment-table2-item/equipment-table2-item.component';
+import { Equipment, Resource } from '../../../equipment/interfaces/equipment.interface';
+import { EquipmentService } from '../../../equipment/services/equipment.service';
+import { ResourceTableComponent } from '../../components/resource-table/resource-table.component';
 
 @Component({
     selector: 'app-show-emergency',
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, NgClass, NgIf, ButtonComponent, NgFor, AttendTableItemComponent],
-    templateUrl: 'show-emergency.component.html'
+    imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, NgClass, 
+        NgIf, ButtonComponent, NgFor, AttendTableItemComponent, ResourceTableComponent],
+    templateUrl: './show-emergency.component.html'
 })
 
 export class ShowEmergencyComponent implements OnInit {
@@ -23,12 +28,14 @@ export class ShowEmergencyComponent implements OnInit {
     emergency_id: string = "";
     public emergency: Emergency = <Emergency>{};
     public attends: Attend[] = [];
+    public equipments: Resource[] = [];
     
     constructor(
         private readonly _formBuilder: FormBuilder,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private emergencyService: EmergencyService
+        private emergencyService: EmergencyService,
+        private equipmentService: EquipmentService
     ) {
         this.form = this._formBuilder.group({
             name: ['', [Validators.required, Validators.email]],
@@ -56,6 +63,14 @@ export class ShowEmergencyComponent implements OnInit {
                 this.attends = resp.data;
             }
         )
+
+        this.equipmentService.getResource(this.emergency_id).subscribe(
+            (resp: any) => {
+                console.log(resp);
+                this.equipments = resp.data;
+            }
+        )
+
     }
 
     onSubmit(): void {

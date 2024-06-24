@@ -113,39 +113,22 @@
             </div>
           </div>
       </div>
+
+
+      <!-- table-actions -->
+      <div class="flex-col rounded-lg md:col-span-2 xl:col-span-3 mt-2 bg-background px-8 py-8 sm:flex-row">
+        <div class="mb-4 flex items-center justify-center">
+          <div class="flex-col items-center">
+            <h3 class="text-md font-bold text-foreground">Resumen de las acciones</h3>
+          </div>
+        </div>
+      
+        <div action-table [auction]="form201" class="md:col-span-2 xl:col-span-3"></div>
+
+
     </div>
 
-    <!-- table-actions -->
-    <div class="flex-col rounded-lg mt-2 bg-background px-8 py-8 sm:flex-row">
-      <div class="mb-4 flex items-center justify-center">
-        <div class="flex-col items-center">
-          <h3 class="text-md font-bold text-foreground">Resumen de las acciones</h3>
-        </div>
-      </div>
     
-      <div class="relative overflow-x-auto">
-        <table class="w-full table-auto">
-          <!--Table head-->
-          <thead class="text-xs uppercase text-muted-foreground">
-            <tr>
-              <th class="py-3 text-left">Fecha</th>
-              <th class="py-3 text-left">Hora</th>
-              <th class="py-3 text-left">Descripción</th>
-            </tr>
-          </thead>
-          <!--end Table head-->
-          <!--Table body-->
-          <tbody>
-            <!-- <tr
-              *ngFor="let action of actions"
-              [auction]="action"
-              action-table-item
-              class="border-b border-dashed border-border hover:bg-card"></tr> -->
-          </tbody>
-          <!--end::Table body-->
-        </table>
-      </div>
-    </div>
     <!-- Fin For -->
 
   </div>
