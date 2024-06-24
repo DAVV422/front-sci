@@ -3,7 +3,6 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  // baseUrl: 'http://localhost:3000/api',
   baseUrl: 'https://back-sci-production.up.railway.app/api',
   baseUrlImages: 'https://emergy-ws-production.up.railway.app/image/upload',
   production: false,
