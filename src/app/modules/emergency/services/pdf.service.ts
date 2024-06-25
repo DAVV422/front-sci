@@ -40,6 +40,7 @@ export class PdfService {
   public generatePDF(emergency_id: string): void {
     this.getEmergency(emergency_id);
   }
+
   public generatePDFFormAction(actions: Action[]): void {
     const doc = new jsPDF('p', 'mm', 'a4');
 
@@ -48,12 +49,17 @@ export class PdfService {
     doc.text('SCI-201 Resumen de las Acciones', 10, 10);
     let pos:number = 15;
     // Cuadros y Texto
-    this.addBox(doc, 10, 15, 190, 10, `1. Fecha y Hora`, `2. Accion:`, 45);
+    this.addBox(doc, 10, 15, 190, 10, `1. Fecha y Hora`, `2. Accion:`, 55);
     for(let action of actions){
       pos += 10;
-      this.addBox(doc, 10, pos, 190, 10, `${ action.date } - ${action.hour}`, `2. Fecha de preparación: ${action.description}`, 95);
+      this.addBox(doc, 10, pos, 190, 10, `${ action.date } - ${action.hour}`, ` ${action.description}`, 55);
     }
 
+    // Pie de página
+    doc.setFontSize(10);
+    doc.text('SCI-201', 10, 290);
+
+    doc.save('resumen_accion.pdf');
   }
 
   public generatePDFForm(form: Form201): void {
