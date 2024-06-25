@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Action, Form201 } from '../../interfaces/emergency.interface';
+import { Action, Emergency, Form201 } from '../../interfaces/emergency.interface';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { CurrencyPipe, NgFor } from '@angular/common';
 import { ActionTableItemComponent } from '../action-table-item/action-table-item.component';
@@ -14,7 +14,7 @@ import { EmergencyService } from '../../services/emergency.service';
 })
 
 export class ActionTableComponent implements OnInit {
-    @Input() auction = <Form201>{};
+    @Input() auction: string = "";
     public actions: Action[] = [];
 
   constructor(
@@ -23,7 +23,8 @@ export class ActionTableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {    
-    this.emergencyServer.getActions(this.auction.id!).subscribe(
+    console.log(this.auction);
+    this.emergencyServer.getActions(this.auction).subscribe(
         (resp: any) => {
             console.log(resp);
             this.actions = resp.data;

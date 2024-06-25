@@ -79,7 +79,7 @@ export class EmergencyService {
   }
 
   getActions(id: string): Observable<Action>{
-    return this.http.get<Action>(`${this.baseUrlAction}/form201/${id}`, this.authService.headers());
+    return this.http.get<Action>(`${this.baseUrlAction}/emergency/${id}`, this.authService.headers());
   }
 
 }
