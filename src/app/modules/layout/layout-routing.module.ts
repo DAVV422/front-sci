@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import { PublicGuard } from '../auth/guards/public.guard';
+import { TermsComponent } from './pages/terms/terms.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,11 @@ const routes: Routes = [
     component: LayoutComponent,    
     loadChildren: () => import('../emergency/emergency.module').then((m) => m.EmergencyModule),
   },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  {
+    path: 'terms',
+    component: TermsComponent,    
+  },
+  { path: '', redirectTo: 'emergencies', pathMatch: 'full' },
   { path: '**', redirectTo: 'error/404' },
 ];
 

@@ -21,11 +21,11 @@
                 <h3 class="text-md font-bold text-foreground">Formulario 201</h3>
                 <span class="text-xs text-muted-foreground"> FRU </span>
               </div>
-              <!-- <button 
-                (click)="forms(emergency_id)"
+              <button 
+                (click)="generatePDF()"
                 class="flex-none rounded-md bg-card px-4 py-2.5 text-xs font-semibold text-muted-foreground hover:bg-muted hover:text-foreground">
-                Ver Formularios
-              </button> -->
+                Generar PDF
+              </button>
             </div>
           
             <div class="relative overflow-x-auto" >
@@ -89,11 +89,11 @@
                     <tr>
                         <th class="py-3 text-left">Ruta Ingreso:</th>
                         <th class="py-3 text-left mb-1 text-sm font-semibold pr-8 text-foreground">
-                            <input type="text" id="entry_route" class="peer block" [attr.disabled]="disabled" value="{{ form201.tactics }}"/>
+                            <input type="text" id="entry_route" class="peer block" [attr.disabled]="disabled" value="{{ form201.entry_route}}"/>
                         </th>
                         <th class="py-3 text-left">Ruta Egreso:</th>
                         <th class="py-3 text-left mb-1 text-sm font-semibold pr-8 text-foreground">
-                            <input type="text" id="egress_route" class="peer block" [attr.disabled]="disabled" value="{{ form201.strategy }}"/>
+                            <input type="text" id="egress_route" class="peer block" [attr.disabled]="disabled" value="{{ form201.egress_route }}"/>
                         </th>
                     </tr>
                 </thead>
@@ -104,7 +104,7 @@
                     <tr>
                         <th class="py-3 text-left">Mensaje General de Seguridad:</th>
                         <th class="py-3 text-left mb-1 text-sm font-semibold pr-8 text-foreground">
-                            <textarea type="text" id="safety_message" class="peer block" [attr.disabled]="disabled" value="{{ form201.tactics }}"></textarea>
+                            <textarea type="text" id="safety_message" class="peer block" [attr.disabled]="disabled" value="{{ form201.safety_message }}"></textarea>
                         </th>
                     </tr>
                 </thead>

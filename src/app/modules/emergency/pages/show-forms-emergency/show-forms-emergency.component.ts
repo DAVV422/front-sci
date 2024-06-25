@@ -9,6 +9,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { tap } from 'rxjs';
 import { Form201Service } from '../../services/form201.service';
 import { ActionTableComponent } from '../../components/action-table/action-table.component';
+import { PdfService } from '../../services/pdf.service';
 
 @Component({
     selector: 'app-show-forms-emergency',
@@ -31,7 +32,8 @@ export class ShowFormsEmergencyComponent implements OnInit {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private emergencyService: EmergencyService,
-        private form201Service: Form201Service
+        private form201Service: Form201Service,
+        private pdfService: PdfService
     ) {
 
     }
@@ -55,4 +57,8 @@ export class ShowFormsEmergencyComponent implements OnInit {
     onSubmit(): void {
 
     }
+
+    public generatePDF(): void {
+        this.pdfService.generatePDF(this.emergency_id);
+      }
 }

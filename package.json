@@ -46,6 +46,7 @@
     "@types/leaflet": "^1.9.12",
     "angular-svg-icon": "^13.0.0",
     "apexcharts": "^3.35.3",
+    "jspdf": "^2.5.1",
     "leaflet": "^1.9.4",
     "ng-apexcharts": "^1.7.1",
     "rxjs": "~7.4.0",
