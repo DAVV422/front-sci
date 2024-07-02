@@ -18,6 +18,24 @@ export interface Emergency {
     resources?: any;
 }
 
+export interface EmergencyUpdate {  
+  id?: string; // Asumiendo que hay una columna 'id' heredada de BaseEntity
+  name?: string;
+  location_description?: string;
+  date?: Date;
+  hour?: string;
+  type?: string;
+  coordinates?: number[];
+  coordinates_pc?: number[];
+  coordinates_e?: number[];
+  state?: string;
+  duration?: string;
+  form201?: Form201[];
+  user?: User;
+  attends?: Attend[];
+  resources?: any;
+}
+
 export interface Form201 {
   id?: string
   objective: string,

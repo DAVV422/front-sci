@@ -15,7 +15,7 @@ import { EquipmentService } from '../../services/equipment.service';
 })
 export class CreateEquipmentComponent implements OnInit {
   form!: FormGroup;
-  statuses = ['Nuevo', 'Buen estado', 'Desgastado', 'Mal estado'];
+  statuses = ['Nuevo', 'Buen Estado', 'Desgastado','Reparado', 'Mal Estado', 'De Baja'];
   selectedFile: File | null = null;
   url_image: string = "";
 

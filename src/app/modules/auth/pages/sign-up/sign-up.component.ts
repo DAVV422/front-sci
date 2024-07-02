@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { UserService } from '../../services/user.service';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { catchError, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, RouterLink, NgClass, NgIf, AngularSvgIconModule, ButtonComponent],
+  imports: [FormsModule, ReactiveFormsModule, RouterLink, NgClass, NgIf, AngularSvgIconModule, ButtonComponent, NgFor],
 })
 export class SignUpComponent implements OnInit {
   form!: FormGroup;
@@ -22,6 +22,8 @@ export class SignUpComponent implements OnInit {
   disabled: boolean = false;
   selectedFile: File | null = null;
   url_image: string = "";
+  grades = ['Postulante', 'Bombero I', 'Bombero II', 'Sargento Bombero','Sub Teniente Bombero', 
+              'Teniente Bombero', 'Capitán Bombero', 'Capitán en Jefe'];
 
   constructor(
     private readonly _formBuilder: FormBuilder, 
@@ -105,5 +107,9 @@ export class SignUpComponent implements OnInit {
         console.log(resp)
       }
     );
+  }
+
+  cancel() {
+    this.router.navigate(['/sci/users'])
   }
 }

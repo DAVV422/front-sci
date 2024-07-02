@@ -16,8 +16,9 @@ import { ButtonComponent } from 'src/app/shared/components/button/button.compone
 })
 export class EditEquipmentComponent implements OnInit {
 
+  selectedFile: File | null = null;
   form!: FormGroup;
-  statuses = ['Disponible', 'En uso', 'En mantenimiento', 'Dado de baja'];
+  statuses = ['Nuevo', 'Buen Estado', 'Reparado', 'Mal Estado', 'De Baja'];
   equipment!: Equipment;
 
   constructor(
@@ -40,6 +41,17 @@ export class EditEquipmentComponent implements OnInit {
     });
   }
 
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      const renamedFile = new File([file], 'perfil' + file.name.substring(file.name.lastIndexOf('.')), { type: file.type });
+      this.selectedFile = renamedFile;
+      this.form.patchValue({
+        profileImage: renamedFile
+      });
+      console.log(renamedFile);
+    }
+  }
 
   getEquipment(id: string) {
     this.equipmentService.getById(id).subscribe((resp: any) => {

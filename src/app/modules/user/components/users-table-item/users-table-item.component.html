@@ -16,9 +16,13 @@
 </td>
 <td class="py-2 pl-2 text-right">
   <div class="flex justify-center">
+    <button (click)="confirmDelete(auction.id)"
+      class="flex ml-2 h-7 w-7 items-center justify-center rounded-md bg-card text-muted-foreground hover:bg-muted hover:text-foreground">
+      <svg-icon src="assets/icons/heroicons/outline/trash.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
+    </button>
     <button
       href="#" (click)="show()"
-      class="flex h-7 w-7 items-center justify-center rounded-md bg-card text-muted-foreground hover:bg-muted hover:text-foreground">
+      class="flex ml-2 h-7 w-7 items-center justify-center rounded-md bg-card text-muted-foreground hover:bg-muted hover:text-foreground">
       <svg-icon src="assets/icons/heroicons/outline/arrow-sm-right.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
     </button>
   </div>

@@ -16,16 +16,23 @@
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
       <div class="md:col-span-2 xl:col-span-3">
         <div class="flex-col rounded-lg bg-background px-8 py-8 sm:flex-row">
-            <div class="mb-4 flex items-center justify-between">
+            <div class="mb-4 flex">
               <div class="flex-col items-center">
                 <h3 class="text-md font-bold text-foreground">Emergencia</h3>
                 <span class="text-xs text-muted-foreground"> FRU </span>
               </div>
-              <button
-                (click)="forms(emergency_id)"
-                class="flex-none rounded-md bg-card px-4 py-2.5 text-xs font-semibold text-muted-foreground hover:bg-muted hover:text-foreground">
-                Ver Formularios
-              </button>
+              <div class="w-full flex justify-end">
+                <button
+                  (click)="update(emergency_id)"
+                  class="flex-none rounded-md mr-2 bg-card align-right px-4 py-2.5 text-xs font-semibold text-muted-foreground hover:bg-muted hover:text-foreground">
+                  Actualizar
+                </button>
+                <button
+                  (click)="forms(emergency_id)"
+                  class="flex-none rounded-md justify-self-end bg-card px-4 py-2.5 text-xs font-semibold text-muted-foreground hover:bg-muted hover:text-foreground">
+                  Ver Formularios
+                </button>
+              </div>
             </div>
 
             <div class="relative overflow-x-auto">
@@ -35,37 +42,39 @@
                     <tr>
                         <th class="py-3 text-left">Nombre:</th>
                         <th class="py-3 text-left mb-1 text-sm font-semibold pr-8 text-foreground">
-                            <input type="text" id="name" class="peer block" [attr.disabled]="disabled" value="{{ emergency.name }}" formControlName="name"/>
+                            <input type="text" id="name" class="peer block" [attr.disabled]="true" value="{{ emergency.name }}" disabled/>
                         </th>
                         <th class="py-3 text-left">Fecha:</th>
                         <th class="py-3 text-left mb-1 text-sm font-semibold pr-8 text-foreground">
-                            <input type="date" id="date" class="peer block" [attr.disabled]="disabled" value="{{ emergency.date }}" formControlName="date"/>
+                            <input type="date" id="date" class="peer block" [attr.disabled]="true" value="{{ emergency.date }}" disabled/>
                         </th>
                     </tr>
                     <tr>
                         <th class="py-3 text-left">Hora:</th>
                         <th class="py-3 text-left mb-1 text-sm font-semibold pr-8 text-foreground">
-                            <input type="time" id="hour" class="peer block" [attr.disabled]="disabled" value="{{ emergency.hour }}" formControlName="hour"/>
+                            <input type="time" id="hour" class="peer block" [attr.disabled]="true" value="{{ emergency.hour }}" disabled/>
                         </th>
                         <th class="py-3 text-left">Estado:</th>
                         <th class="py-3 text-left mb-1 text-sm font-semibold pr-8 text-foreground">
-                            <input type="text" id="state" class="peer block" [attr.disabled]="disabled" value="{{ emergency.state }}" formControlName="state"/>
+                            <input type="text" id="state" class="peer block" [attr.disabled]="true" value="{{ emergency.state }}" disabled/>
                         </th>
                     </tr>
                     <tr>
                         <th class="py-3 text-left">Duración:</th>
                         <th class="py-3 text-left mb-1 text-sm font-semibold pr-8 text-foreground">
-                            <input type="text" id="duration" class="peer block" [attr.disabled]="disabled" value="{{ emergency.duration !=='' ? emergency.duration : 'No definido' }}" formControlName="duration"/>
+                            <input type="text" id="duration" class="peer block" value="{{ emergency.duration !=='' ? emergency.duration : 'No definido' }}" disabled/>
                         </th>
                         <th class="py-3 text-left">Descripción de la ubicación:</th>
                         <th class="py-3 text-left mb-1 text-sm font-semibold pr-8 text-foreground">
-                            <input type="text" id="location_description" class="peer block" [attr.disabled]="disabled" value="{{ emergency.location_description }}" formControlName="location_description"/>
+                            <input type="text" id="location_description" class="peer block" value="{{ emergency.location_description }}" disabled/>
                         </th>
                     </tr>
                 </thead>
                 <!--end Table head-->
               </table>
-
+              <div class="w-full grid justify-items-center">
+                <div id="map" style="height: 300px; width: 400px;"></div>
+              </div>
             </div>
           </div>
       </div>
@@ -102,6 +111,8 @@
         </table>
       </div>
     </div>
+
+    
 
     <!-- table-actions -->
     <div class="flex-col rounded-lg md:col-span-2 xl:col-span-3 mt-2 bg-background px-8 py-8 sm:flex-row">

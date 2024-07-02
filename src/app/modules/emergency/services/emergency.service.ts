@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
-import { Action, Attend, Charge, Emergency } from '../interfaces/emergency.interface';
+import { Action, Attend, Charge, Emergency, EmergencyUpdate } from '../interfaces/emergency.interface';
 import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable({
@@ -38,7 +38,7 @@ export class EmergencyService {
     this.authService.headers());
   }
 
-  update(emergency: Emergency): Observable<Emergency | undefined> {
+  update(emergency: EmergencyUpdate): Observable<Emergency | undefined> {
     const {user, ...rest} = emergency;
     if (!emergency.id) throw new Error('No se ha encontrado el id de la emergencia');
     return this.http.patch<Emergency>(`${this.baseUrl}/${emergency.id}`, rest, this.authService.headers())
